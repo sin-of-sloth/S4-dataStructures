@@ -1,72 +1,107 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-struct node
-{
-	int data;
-	struct node* next;
-};
+long int S[10000];
+int top = -1;
 
-void push(struct node** S, int a)
+void push(long int a)
 {
-	struct node* newNode = (struct node*)malloc(sizeof(struct node));
-	newNode->data = a;
-	newNode->next = *S;
-	*S = newNode;
+	S[++top] = a;
 }
 
-int pop(struct node** S)
+long int pop()
 {
-	int q = (*S)->data;
-	*S = (*S)->next;
-	return q;
+	return S[top--];
 }
 
 
 int main()
 {
-	char *prefix = (char*)malloc(sizeof(char)), symbol;
-	int length = 0, i, result, num1, num2;
+	char *postfix = (char*)malloc(sizeof(char));
+	int symbol;
+	long int length = 0, i, result, num1, num2;
 	
-	//INPUTTING THE prefix EXPRESSION
+	//INPUTTING THE postfix EXPRESSION
 	do{
 		length++;
 		symbol = getchar();
-		prefix = (char*)realloc(prefix, sizeof(char) * length);
-		prefix[length-1] = symbol;
+		postfix = (char*)realloc(postfix, sizeof(char) * length);
+		postfix[length-1] = symbol;
+		
+		if(symbol>='0' && symbol<='9')
+		{
+			if(length>0 && postfix[length-2]!=' ')
+			{
+				num1 = symbol-48 + 10*pop();
+				push(num1);
+			}
+			else
+				push(symbol-48);
+		}
+		else if(symbol == ' ')
+			continue;
+		else if(symbol == '\n')
+			break;
+		else
+		{
+			num2 = pop();
+			num1 = pop();
+			if(symbol == '+')
+				push(num1 + num2);
+			else if(symbol == '-')
+				push(num1-num2);
+			else if(symbol == '*')
+				push(num1*num2);
+			else if(symbol == '/')
+				push(num1/num2);
+			else if(symbol == '%')
+				push(num1%num2);
+		}
 	}while(symbol != '\n');
-	
-	printf("%s", prefix);
+	result = pop();
+	printf("%ld\n%s", result, postfix);
 	char infix[length];
 	
 	//BUILDING infix EXPRESSION
-	int k = 0, j;
-	for(i=0;i<length-1;i++)
-	{
-		if(prefix[i]>='0' && prefix[i]<='9')
-			infix[k]=prefix[i];
-		else if(prefix[i] == ' ')
-			infix[k]='~';
-		else
-		{
-			j=k-3;
-			while(infix[j] != '~')
-			{
-				if(infix[j-1]>='0' && infix[j-1]<='9')
-					j--;
-				else
-					j-=3;
-			}
-			infix[j]=prefix[i];
-			k--;
-		}
-		
-	printf("%s\n", infix);
-		k++;
-	}
+	
 	
 	//EVALUATING THE RESULT
-	
-	
+	for(i=0;i<length-1;i++)
+	{
+		if(postfix[i]>='0' && postfix[i]<='9')
+		{
+			if(i>0 && postfix[i-1]>='0' && postfix[i-1]<='9')
+			{
+				num1 = (int)postfix[i];
+				num1 = num1-48 + (10*pop());
+				push(num1);
+			}
+			else
+			{
+				num1 = (int)postfix[i];
+				push(num1-48);
+			}
+		}
+		else if(postfix[i] == ' ')
+			continue;
+		else if(postfix[i] == '\n')
+			break;
+		else
+		{
+			num2 = pop();
+			num1 = pop();
+			if(postfix[i] == '+')
+				push(num1 + num2);
+			else if(postfix[i] == '-')
+				push(num1-num2);
+			else if(postfix[i] == '*')
+				push(num1*num2);
+			else if(postfix[i] == '/')
+				push(num1/num2);
+			else if(postfix[i] == '%')
+				push(num1%num2);	
+		}
+	}
+
 	return 0;
 }
