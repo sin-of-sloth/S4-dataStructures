@@ -1,26 +1,23 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define lli long long int
-#define node struct node2
-
-node
+struct node
 {
-        lli data;
-        node* next;
+        long long int data;
+        struct node* next;
 };
 
-node *beg, *newNode, *temp;
+struct node *beg, *newNode, *temp;
 
-node* createNewNode(lli a)
+struct node* createNewNode(long long int a)
 {
-        newNode = (node*)malloc(sizeof(node));
+        newNode = (struct node*)malloc(sizeof(struct node));
         newNode->data = a;
         newNode->next = NULL;
         return newNode;
 }
 
-void insertList(lli a)
+void insertSLL(long long int a)
 {
         newNode = createNewNode(a);
         if(newNode == NULL)
@@ -36,7 +33,7 @@ void insertList(lli a)
         }
 }
 
-void printList()
+void printSLL()
 {
         temp = beg;
         while(temp->next != NULL)
@@ -47,13 +44,13 @@ void printList()
         printf("%lld\n", temp->data);
 }
 
-void reverseList()
+void reverseSLL()
 {
         if(beg==NULL || beg->next==NULL)
                 return;
         else
         {
-                node *r;
+                struct node *r;
                 temp=beg->next;
                 beg->next=NULL;
                 while(temp->next != NULL)
@@ -70,7 +67,7 @@ void reverseList()
 
 int main()
 {
-        lli a=0;
+        long long int a=0;
         int c,cbefore = ' ', multiplier = 1;
         do
         {
@@ -79,7 +76,7 @@ int main()
           {
             if (cbefore != ' ')
             {
-              insertList(multiplier * a);
+              insertSLL(multiplier * a);
             }
             break;
           }
@@ -89,7 +86,7 @@ int main()
           {
             if (cbefore != ' ')
             {
-              insertList(multiplier * a);
+              insertSLL(multiplier * a);
               a=0;
               multiplier = 1;
             }
@@ -102,7 +99,7 @@ int main()
             cbefore = c;
           }
         }while(1);
-        reverseList();
-        printList();
+        reverseSLL();
+        printSLL();
         return 0;
 }                                         

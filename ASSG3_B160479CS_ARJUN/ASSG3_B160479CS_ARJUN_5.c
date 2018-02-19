@@ -19,20 +19,19 @@ long int pop()
 
 int main()
 {
-	int infix[MAX];
 	char *postfix = (char*)malloc(sizeof(char)), ch;
 	int i, j, inLen = -1, postLen = -1;
 	long int a = 0, res, num1, num2;
-	for(i=0;i<MAX;i++)
-		infix[i] = -1;
+	
 	while((ch = getchar()) != '\n')
 	{
 		postLen+=1;
 		postfix = (char*)realloc(postfix, sizeof(char) * (postLen + 1));
 		postfix[postLen] = ch;
 	}
-	
-	i=0;
+	int *infix = (int*)malloc(sizeof(int) * (postLen + 1));
+	for(i=0;i<=postLen;i++)
+		infix[i] = -1;
 	for(i=0; i<=postLen; i++)
 	{
 		if(postfix[i] == ' ')
@@ -85,5 +84,7 @@ int main()
 			printf("%c", infix[i]);
 	}
 	printf("\n%ld", res);
+	free(postfix);
+	free(infix);
 	return 0;
 }

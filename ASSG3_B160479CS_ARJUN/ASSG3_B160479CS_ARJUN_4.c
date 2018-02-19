@@ -14,16 +14,16 @@ int heapSize = -1;
 
 void pqMinHeapify(int i)
 {
-  int l = 2 * i + 1;
-  int r = 2 * i + 2;
+  int left = 2 * i + 1;
+  int right = 2 * i + 2;
   int smallest;
 
-  if(l <= heapSize && pq[l].pr < pq[i].pr)
-    smallest = l;
+  if(left <= heapSize && pq[left].pr < pq[i].pr)
+    smallest = left;
   else
     smallest = i;
-  if(r <= heapSize && pq[r].pr < pq[smallest].pr)
-    smallest = r;
+  if(right <= heapSize && pq[right].pr < pq[smallest].pr)
+    smallest = right;
   if(smallest != i)
     {
       struct node temp = pq[i];
@@ -34,7 +34,7 @@ void pqMinHeapify(int i)
 }
 
 
-void insert(elem, pr)
+void insert(long int elem, long int pr)
 {
 	heapSize += 1;
 	pq[heapSize].val = elem;
@@ -70,7 +70,7 @@ void get_min()
 		printf("%ld (%ld)\n", pq[0].val, pq[0].pr);
 }
 
-void decrease_priority(elem, pr)
+void decrease_priority(long int elem, long int pr)
 {
 	int i=0;
 	while(1)
