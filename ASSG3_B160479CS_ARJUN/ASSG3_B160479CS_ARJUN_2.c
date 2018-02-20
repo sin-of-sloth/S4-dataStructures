@@ -32,7 +32,7 @@ void difference_of_digits(struct node** head1, struct node* head2)
 		(*head1)->data +=10;
 		(*head1)->next->data -= 1;
 	}
-	insertSLL(&(*head1), ((*head1)->data - head2->data));
+	(*head1)->data = (*head1)->data - (head2->data);
 	if(head2->next != NULL)
 		difference_of_digits(&((*head1)->next), head2->next);
 }
@@ -114,12 +114,13 @@ int main()
 	//ASSIGNING LARGEST AND SMALLEST
 	large = head1;
 	small = head2;
-	while(head1->next != NULL)
+	while(head1 != NULL)
 	{
 		if(head1->data == head2->data)
 		{
 			head1 = head1->next;
 			head2 = head2->next;
+			n--;
 		}
 		else if(head1->data < head2->data)
 		{
