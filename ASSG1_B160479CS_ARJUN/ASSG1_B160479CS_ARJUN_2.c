@@ -1,5 +1,7 @@
+
 #include<stdio.h>
 
+//the main function of a c program
 int main()
 {
         FILE *iptr,*optr;
