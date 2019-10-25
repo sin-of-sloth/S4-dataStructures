@@ -3,6 +3,7 @@
 int main()
 {
         int N,K,i,choice;
+        //variables
         //printf("\n1.Encryption\n2.Decryption\n\n\tEnter your choice : ");
         scanf("%d",&choice);
         //printf("\nEnter String Length : ");
