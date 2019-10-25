@@ -1,3 +1,5 @@
+
+// program for modified quick sort
 #include<stdio.h>
 
 int count=0;
