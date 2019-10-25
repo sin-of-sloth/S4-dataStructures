@@ -1,3 +1,4 @@
+//question 3 b
 #include<stdio.h>
 
 #define MAX 100
