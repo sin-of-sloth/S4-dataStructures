@@ -1,3 +1,4 @@
+//Question 3 A
 #include<stdio.h>
 #include<stdlib.h>
 
