@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<limits.h>
 #include<stdlib.h>
-
+// program for merge sort
 
 void Merge(long int A[], int p, int r1, int r2, int q)
 {
