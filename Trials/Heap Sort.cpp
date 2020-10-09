@@ -1,3 +1,4 @@
+//Program to perform heap sort on an array of integers
 
 #include <stdio.h>
 
